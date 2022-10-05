@@ -1,0 +1,15 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  replicaCount: 1
+
+  image:
+    repository: localhost:32000/argocd-docs
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "0.0.1"
+
+  istio:
+    enabled: true

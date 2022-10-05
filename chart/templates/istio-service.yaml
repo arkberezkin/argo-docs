@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: argocd-web
+  namespace: argocd-web-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/gateway
+  http:
+    - match:
+      - uri:
+          prefix: /
+        port: 80
+      route:
+      - destination:
+          port:
+            number: 80
+          host: argocd-web-service.argocd-web-service.svc.cluster.local

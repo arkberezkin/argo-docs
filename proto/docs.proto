@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package docs;
+
+message DocsRequest {
+    string user_id = 1;
+}
+
+message Doc {
+    string title = 1;
+    string user_id = 2;
+    string text = 3;
+}
+
+message DocsResponse {
+    repeated Doc documents = 1;
+}
+
+service DocsService {
+  rpc Documents(DocsRequest) returns (DocsResponse);
+}
