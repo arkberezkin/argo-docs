@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: issuu-file-update-
+  namespace: argocd-web-service
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    metadata:
+      annotations:
+        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+    spec:
+      containers:
+      - name: issuu-file-update
+        image: localhost:32000/tester:0.0.1
+        imagePullPolicy: IfNotPresent
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "grpcurl -plaintext -d '{ \"name\": \"issuu-file-docs\" }' argocd-helm-example-service.argocd-helm-example-service.svc.cluster.local:80 hello.HelloService.Hello && curl -sf -XPOST http://127.0.0.1:15020/quitquitquit" ]
+      restartPolicy: Never
+  backoffLimit: 2
+
+
