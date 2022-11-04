@@ -20,4 +20,4 @@ global:
     portName: grpc
 
   podAnnotations:
-    sidecar.istio.io/extraStatTags: request_url
+    sidecar.istio.io/extraStatTags: request_url,destination_port
