@@ -10,6 +10,9 @@ class DocsService(DocsServiceServicer):
     ):
         logging.info(f"Documents function was called {req.user_id}")
 
+        if req.user_id == 'error':
+            raise ValueError("Error user is calling!")
+
         return docs_pb.DocsResponse(
             documents=[
                 docs_pb.Doc(
